@@ -24,10 +24,10 @@ pipeline {
               sh 'npm test'
           }
         }
-        stage ('Chạy Junit){
+        stage ('Chạy Junit'){
          steps {
-             junit 'test.xml'
-         }
+                junit 'test.xml'
+            }
         }
     }
     post {
