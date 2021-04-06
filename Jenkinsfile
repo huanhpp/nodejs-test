@@ -24,6 +24,30 @@ pipeline {
               sh 'npm test'
           }
         }
+        stage ('Chạy Junit){
+         steps {
+             junit 'test.xml'
+         }
+        }
+    }
+    post {
+        always {
+            echo 'One way or another, I have finished'
+            deleteDir() /* clean up our workspace */
+        }
+        success {
+            echo 'I succeeded!'
+            emailext body: 'ok!', subject: 'nodejs-test', to: 'trunghuan@gmail.com'
+        }
+        unstable {
+            echo 'I am unstable :/'
+        }
+        failure {
+            echo 'I failed :('
+        }
+        changed {
+            echo 'Things were different before...'
+        }
     }
 }
  
