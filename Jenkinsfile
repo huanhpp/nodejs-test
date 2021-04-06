@@ -38,6 +38,11 @@ pipeline {
         success {
             echo 'I succeeded!'
             emailext body: 'ok!', subject: 'nodejs-test', to: 'trunghuan@gmail.com'
+            sh 'docker build -t huanhp/nodejs-test .'
+            withDockerRegistry(credentialsId: 'docker-hub-huanhp', url: 'https://index.docker.io/v1/') {
+                    // some block
+                sh 'sudo docker push huanhp/nodejs-test'
+            }
         }
         unstable {
             echo 'I am unstable :/'
