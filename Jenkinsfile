@@ -2,6 +2,7 @@ pipeline {
     agent {
         label 'docker-agent'
     }
+    tools {nodejs "nodejs"}
     stages {
         stage('Clone source code') {
             steps {
