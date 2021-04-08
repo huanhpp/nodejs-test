@@ -3,12 +3,24 @@ pipeline {
         label 'docker-agent'
     }
     //tools {nodejs "nodejs"}
+    environment {
+        scannerHome = tool 'sonarscan’
+    }
     stages {
         stage('Clone source code') {
             steps {
                 git 'https://github.com/huanhpp/nodejs-test.git'
             }
         }
+        stage ('Sonar'){
+            steps {
+                withSonarQubeEnv('sonar-server') {
+                    sh "${scannerHome}/bin/sonar-scanner"
+                }
+                waitForQualityGate abortPipeline: true
+            }
+        }
+        /*
         stage ('Cài đặt dependencies của app'){
             steps {
                 sh 'npm install'
@@ -29,6 +41,7 @@ pipeline {
                 junit 'test.xml'
             }
         }
+        */
     }
     post {
         always {
