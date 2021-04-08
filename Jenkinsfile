@@ -4,7 +4,7 @@ pipeline {
     }
     //tools {nodejs "nodejs"}
     environment {
-        scannerHome = tool 'sonarscan’
+        scannerHome = tool 'sonarscan'
     }
     stages {
         stage('Clone source code') {
