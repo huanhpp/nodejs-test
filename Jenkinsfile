@@ -10,6 +10,7 @@ pipeline {
         stage('Clone source code') {
             steps {
                 git 'https://github.com/huanhpp/nodejs-test.git'
+                echo 'ha ha'
             }
         }
         stage ('Sonar'){
